@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cubtp.dao.CommentDao">
+  <resultMap id="BaseResultMap" type="com.cubtp.vo.Comment">
+    <id column="comment_id" jdbcType="INTEGER" property="commentId" />
+    <result column="comment_user_id" jdbcType="VARCHAR" property="commentUserId" />
+    <result column="comment_book_id" jdbcType="INTEGER" property="commentBookId" />
+    <result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+    <result column="comment_date" jdbcType="TIMESTAMP" property="commentDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    comment_id, comment_user_id, comment_book_id, comment_content, comment_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cubtp_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cubtp_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cubtp.vo.Comment">
+    insert into cubtp_comment (comment_id, comment_user_id, comment_book_id, 
+      comment_content, comment_date)
+    values (#{commentId,jdbcType=INTEGER}, #{commentUserId,jdbcType=VARCHAR}, #{commentBookId,jdbcType=INTEGER}, 
+      #{commentContent,jdbcType=VARCHAR}, #{commentDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cubtp.vo.Comment">
+    insert into cubtp_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="commentUserId != null">
+        comment_user_id,
+      </if>
+      <if test="commentBookId != null">
+        comment_book_id,
+      </if>
+      <if test="commentContent != null">
+        comment_content,
+      </if>
+      <if test="commentDate != null">
+        comment_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="commentUserId != null">
+        #{commentUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentBookId != null">
+        #{commentBookId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cubtp.vo.Comment">
+    update cubtp_comment
+    <set>
+      <if test="commentUserId != null">
+        comment_user_id = #{commentUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentBookId != null">
+        comment_book_id = #{commentBookId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null">
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        comment_date = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cubtp.vo.Comment">
+    update cubtp_comment
+    set comment_user_id = #{commentUserId,jdbcType=VARCHAR},
+      comment_book_id = #{commentBookId,jdbcType=INTEGER},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      comment_date = #{commentDate,jdbcType=TIMESTAMP}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="MultiConditionalQuery" parameterType="com.cubtp.vo.Comment" resultMap="BaseResultMap">
+  		select * from cubtp_comment
+  		<where>
+  			<if test="commentUserId!=null">
+  				and cubtp_comment.comment_user_id = #{commentUserId}
+  			</if>
+  			<if test="commentBookId!=null">
+  				and cubtp_comment.comment_book_id = #{commentBookId}
+  			</if>
+  			<if test="commentContent!=null">
+  				and cubtp_comment.comment_content = #{commentContent}
+  			</if>
+  			<if test="commentDate!=null">
+  				and cubtp_comment.comment_date = #{commentDate}
+  			</if>
+  		</where>
+  		order by cubtp_comment.comment_date DESC
+  </select>
+</mapper>

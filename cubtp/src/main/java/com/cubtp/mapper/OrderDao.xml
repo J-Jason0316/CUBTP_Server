@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cubtp.dao.OrderDao">
+	<resultMap id="BaseResultMap" type="com.cubtp.vo.Order">
+		<id column="order_id" jdbcType="INTEGER" property="orderId" />
+		<result column="order_user_id" jdbcType="VARCHAR"
+			property="orderUserId" />
+		<result column="order_book_id" jdbcType="INTEGER"
+			property="orderBookId" />
+		<result column="order_price" jdbcType="REAL"
+			property="orderPrice" />
+		<result column="order_num" jdbcType="INTEGER"
+			property="orderNum" />
+		<result column="order_address" jdbcType="VARCHAR"
+			property="orderAddress" />
+		<result column="order_user_name" jdbcType="VARCHAR"
+			property="orderUserName" />
+		<result column="order_user_tel" jdbcType="VARCHAR"
+			property="orderUserTel" />
+		<result column="order_user_remark" jdbcType="VARCHAR"
+			property="orderUserRemark" />
+		<result column="order_send_status" jdbcType="VARCHAR"
+			property="orderSendStatus" />
+		<result column="order_receive_status" jdbcType="VARCHAR"
+			property="orderReceiveStatus" />
+		<result column="order_status" jdbcType="VARCHAR"
+			property="orderStatus" />
+		<result column="order_date" jdbcType="TIMESTAMP"
+			property="orderDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		order_id, order_user_id, order_book_id, order_price,
+		order_num, order_address,
+		order_user_name,
+		order_user_tel,
+		order_user_remark, order_send_status, order_receive_status,
+		order_status,
+		order_date
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cubtp_order
+		where order_id = #{orderId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from cubtp_order
+		where order_id =
+		#{orderId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cubtp.vo.Order">
+		insert into cubtp_order
+		(order_id, order_user_id, order_book_id,
+		order_price, order_num,
+		order_address,
+		order_user_name, order_user_tel, order_user_remark,
+		order_send_status, order_receive_status, order_status,
+		order_date)
+		values (#{orderId,jdbcType=INTEGER}, #{orderUserId,jdbcType=VARCHAR},
+		#{orderBookId,jdbcType=INTEGER},
+		#{orderPrice,jdbcType=REAL},
+		#{orderNum,jdbcType=INTEGER}, #{orderAddress,jdbcType=VARCHAR},
+		#{orderUserName,jdbcType=VARCHAR}, #{orderUserTel,jdbcType=VARCHAR},
+		#{orderUserRemark,jdbcType=VARCHAR},
+		#{orderSendStatus,jdbcType=VARCHAR},
+		#{orderReceiveStatus,jdbcType=VARCHAR},
+		#{orderStatus,jdbcType=VARCHAR},
+		#{orderDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.cubtp.vo.Order">
+		insert into cubtp_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				order_id,
+			</if>
+			<if test="orderUserId != null">
+				order_user_id,
+			</if>
+			<if test="orderBookId != null">
+				order_book_id,
+			</if>
+			<if test="orderPrice != null">
+				order_price,
+			</if>
+			<if test="orderNum != null">
+				order_num,
+			</if>
+			<if test="orderAddress != null">
+				order_address,
+			</if>
+			<if test="orderUserName != null">
+				order_user_name,
+			</if>
+			<if test="orderUserTel != null">
+				order_user_tel,
+			</if>
+			<if test="orderUserRemark != null">
+				order_user_remark,
+			</if>
+			<if test="orderSendStatus != null">
+				order_send_status,
+			</if>
+			<if test="orderReceiveStatus != null">
+				order_receive_status,
+			</if>
+			<if test="orderStatus != null">
+				order_status,
+			</if>
+			<if test="orderDate != null">
+				order_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderId != null">
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="orderUserId != null">
+				#{orderUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderBookId != null">
+				#{orderBookId,jdbcType=INTEGER},
+			</if>
+			<if test="orderPrice != null">
+				#{orderPrice,jdbcType=REAL},
+			</if>
+			<if test="orderNum != null">
+				#{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderAddress != null">
+				#{orderAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="orderUserName != null">
+				#{orderUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderUserTel != null">
+				#{orderUserTel,jdbcType=VARCHAR},
+			</if>
+			<if test="orderUserRemark != null">
+				#{orderUserRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="orderSendStatus != null">
+				#{orderSendStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="orderReceiveStatus != null">
+				#{orderReceiveStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDate != null">
+				#{orderDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cubtp.vo.Order">
+		update cubtp_order
+		<set>
+			<if test="orderUserId != null">
+				order_user_id = #{orderUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderBookId != null">
+				order_book_id = #{orderBookId,jdbcType=INTEGER},
+			</if>
+			<if test="orderPrice != null">
+				order_price = #{orderPrice,jdbcType=REAL},
+			</if>
+			<if test="orderNum != null">
+				order_num = #{orderNum,jdbcType=INTEGER},
+			</if>
+			<if test="orderAddress != null">
+				order_address = #{orderAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="orderUserName != null">
+				order_user_name = #{orderUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="orderUserTel != null">
+				order_user_tel = #{orderUserTel,jdbcType=VARCHAR},
+			</if>
+			<if test="orderUserRemark != null">
+				order_user_remark = #{orderUserRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="orderSendStatus != null">
+				order_send_status = #{orderSendStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="orderReceiveStatus != null">
+				order_receive_status =
+				#{orderReceiveStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				order_status = #{orderStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="orderDate != null">
+				order_date = #{orderDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where order_id = #{orderId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cubtp.vo.Order">
+		update cubtp_order
+		set order_user_id =
+		#{orderUserId,jdbcType=VARCHAR},
+		order_book_id =
+		#{orderBookId,jdbcType=INTEGER},
+		order_price =
+		#{orderPrice,jdbcType=REAL},
+		order_num = #{orderNum,jdbcType=INTEGER},
+		order_address = #{orderAddress,jdbcType=VARCHAR},
+		order_user_name =
+		#{orderUserName,jdbcType=VARCHAR},
+		order_user_tel =
+		#{orderUserTel,jdbcType=VARCHAR},
+		order_user_remark =
+		#{orderUserRemark,jdbcType=VARCHAR},
+		order_send_status =
+		#{orderSendStatus,jdbcType=VARCHAR},
+		order_receive_status =
+		#{orderReceiveStatus,jdbcType=VARCHAR},
+		order_status =
+		#{orderStatus,jdbcType=VARCHAR},
+		order_date =
+		#{orderDate,jdbcType=TIMESTAMP}
+		where order_id =
+		#{orderId,jdbcType=INTEGER}
+	</update>
+
+
+	<!-- 获取订单信息 -->
+	<select id="getOrderByUserId" parameterType="java.lang.String"
+		resultMap="getOrderMap">
+		select
+		*
+		from cubtp_book,
+		cubtp_order
+		where cubtp_book.book_id =
+		cubtp_order.order_book_id and order_user_id =
+		#{userId,jdbcType=VARCHAR}
+		order by cubtp_order.order_date DESC
+	</select>
+	
+	<!-- 获取用户已出售的书籍 -->
+	<select id="getSoldOrderByUserId" parameterType="java.lang.String"
+		resultMap="getOrderMap">
+		select
+		*
+		from cubtp_book,
+		cubtp_order
+		where cubtp_book.book_id =
+		cubtp_order.order_book_id and cubtp_book.book_seller_id =
+		#{userId,jdbcType=VARCHAR}
+		order by cubtp_order.order_date DESC
+	</select>
+	<resultMap id="getOrderMap" type="com.cubtp.vo.Order">
+		<id column="order_id" jdbcType="INTEGER" property="orderId" />
+		<result column="order_user_id" jdbcType="VARCHAR"
+			property="orderUserId" />
+		<result column="order_book_id" jdbcType="INTEGER"
+			property="orderBookId" />
+		<result column="order_price" jdbcType="REAL"
+			property="orderPrice" />
+		<result column="order_num" jdbcType="INTEGER"
+			property="orderNum" />
+		<result column="order_address" jdbcType="VARCHAR"
+			property="orderAddress" />
+		<result column="order_user_name" jdbcType="VARCHAR"
+			property="orderUserName" />
+		<result column="order_user_tel" jdbcType="VARCHAR"
+			property="orderUserTel" />
+		<result column="order_user_remark" jdbcType="VARCHAR"
+			property="orderUserRemark" />
+		<result column="order_send_status" jdbcType="VARCHAR"
+			property="orderSendStatus" />
+		<result column="order_receive_status" jdbcType="VARCHAR"
+			property="orderReceiveStatus" />
+		<result column="order_status" jdbcType="VARCHAR"
+			property="orderStatus" />
+		<result column="order_date" jdbcType="TIMESTAMP"
+			property="orderDate" />
+		<association property="book" javaType="com.cubtp.vo.Book">
+			<id column="book_id" jdbcType="INTEGER" property="bookId" />
+			<result column="book_name" jdbcType="VARCHAR"
+				property="bookName" />
+			<result column="book_cover" jdbcType="VARCHAR"
+				property="bookCover" />
+			<result column="book_author" jdbcType="VARCHAR"
+				property="bookAuthor" />
+			<result column="book_type" jdbcType="VARCHAR"
+				property="bookType" />
+			<result column="book_subject" jdbcType="VARCHAR"
+				property="bookSubject" />
+			<result column="book_press" jdbcType="VARCHAR"
+				property="bookPress" />
+			<result column="book_desc" jdbcType="VARCHAR"
+				property="bookDesc" />
+			<result column="book_price" jdbcType="REAL"
+				property="bookPrice" />
+			<result column="book_num" jdbcType="INTEGER"
+				property="bookNum" />
+			<result column="book_degree" jdbcType="VARCHAR"
+				property="bookDegree" />
+			<result column="book_seller_id" jdbcType="INTEGER"
+				property="bookSellerId" />
+			<result column="book_status" jdbcType="INTEGER"
+				property="bookStatus" />
+		</association>
+	</resultMap>
+
+
+</mapper>

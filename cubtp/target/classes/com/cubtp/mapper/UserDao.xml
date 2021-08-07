@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cubtp.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.cubtp.vo.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_tel" jdbcType="VARCHAR" property="userTel" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_head_img" jdbcType="VARCHAR" property="userHeadImg" />
+    <result column="user_role" jdbcType="INTEGER" property="userRole" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_pwd, user_tel, user_email, user_head_img, user_role
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cubtp_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cubtp_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cubtp.vo.User">
+    insert into cubtp_user (user_id, user_pwd, user_tel, 
+      user_email, user_head_img, user_role
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userHeadImg,jdbcType=VARCHAR}, #{userRole,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cubtp.vo.User">
+    insert into cubtp_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+      <if test="userTel != null">
+        user_tel,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userHeadImg != null">
+        user_head_img,
+      </if>
+      <if test="userRole != null">
+        user_role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null">
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadImg != null">
+        #{userHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        #{userRole,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cubtp.vo.User">
+    update cubtp_user
+    <set>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null">
+        user_tel = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeadImg != null">
+        user_head_img = #{userHeadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null">
+        user_role = #{userRole,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cubtp.vo.User">
+    update cubtp_user
+    set user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_tel = #{userTel,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_head_img = #{userHeadImg,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getAllUser" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from cubtp_user
+    where user_role = 0
+  </select>
+</mapper>

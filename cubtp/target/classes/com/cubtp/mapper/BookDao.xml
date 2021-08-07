@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cubtp.dao.BookDao">
+	<resultMap id="BaseResultMap" type="com.cubtp.vo.Book">
+		<id column="book_id" jdbcType="INTEGER" property="bookId" />
+		<result column="book_name" jdbcType="VARCHAR"
+			property="bookName" />
+		<result column="book_cover" jdbcType="VARCHAR"
+			property="bookCover" />
+		<result column="book_author" jdbcType="VARCHAR"
+			property="bookAuthor" />
+		<result column="book_type" jdbcType="VARCHAR"
+			property="bookType" />
+		<result column="book_subject" jdbcType="VARCHAR"
+			property="bookSubject" />
+		<result column="book_press" jdbcType="VARCHAR"
+			property="bookPress" />
+		<result column="book_desc" jdbcType="VARCHAR"
+			property="bookDesc" />
+		<result column="book_price" jdbcType="REAL"
+			property="bookPrice" />
+		<result column="book_old_price" jdbcType="REAL"
+			property="bookOldPrice" />
+		<result column="book_num" jdbcType="INTEGER" property="bookNum" />
+		<result column="book_degree" jdbcType="VARCHAR"
+			property="bookDegree" />
+		<result column="book_seller_id" jdbcType="VARCHAR"
+			property="bookSellerId" />
+		<result column="book_status" jdbcType="INTEGER"
+			property="bookStatus" />
+		<result column="book_notes" jdbcType="VARCHAR"
+			property="bookNotes" />
+		<result column="book_upload_date" jdbcType="TIMESTAMP"
+			property="bookUploadDate" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		book_id, book_name, book_cover, book_author, book_type,
+		book_subject,
+		book_press,
+		book_desc, book_price,book_old_price, book_num, book_degree,
+		book_seller_id, book_status,book_notes,book_upload_date
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from cubtp_book
+		where book_id = #{bookId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from cubtp_book
+		where book_id =
+		#{bookId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cubtp.vo.Book">
+		insert into cubtp_book
+		(book_id, book_name, book_cover,
+		book_author, book_type, book_subject,
+		book_press, book_desc, book_price,
+		book_old_price,book_num, book_degree,
+		book_seller_id,
+		book_status,book_notes,book_upload_date)
+		values (#{bookId,jdbcType=INTEGER},
+		#{bookName,jdbcType=VARCHAR},
+		#{bookCover,jdbcType=VARCHAR},
+		#{bookAuthor,jdbcType=VARCHAR}, #{bookType,jdbcType=VARCHAR},
+		#{bookSubject,jdbcType=VARCHAR},
+		#{bookPress,jdbcType=VARCHAR},
+		#{bookDesc,jdbcType=VARCHAR},
+		#{bookPrice,jdbcType=REAL},
+		#{bookOldPrice,jdbcType=REAL},
+		#{bookNum,jdbcType=INTEGER}, #{bookDegree,jdbcType=VARCHAR},
+		#{bookSellerId,jdbcType=VARCHAR},
+		#{bookStatus,jdbcType=INTEGER},
+		#{bookNotes,jdbcType=VARCHAR},
+		#{bookUploadDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.cubtp.vo.Book">
+		insert into cubtp_book
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bookId != null">
+				book_id,
+			</if>
+			<if test="bookName != null">
+				book_name,
+			</if>
+			<if test="bookCover != null">
+				book_cover,
+			</if>
+			<if test="bookAuthor != null">
+				book_author,
+			</if>
+			<if test="bookType != null">
+				book_type,
+			</if>
+			<if test="bookSubject != null">
+				book_subject,
+			</if>
+			<if test="bookPress != null">
+				book_press,
+			</if>
+			<if test="bookDesc != null">
+				book_desc,
+			</if>
+			<if test="bookPrice != null">
+				book_price,
+			</if>
+			<if test="bookOldPrice != null">
+				book_old_price,
+			</if>
+			<if test="bookNum != null">
+				book_num,
+			</if>
+			<if test="bookDegree != null">
+				book_degree,
+			</if>
+			<if test="bookSellerId != null">
+				book_seller_id,
+			</if>
+			<if test="bookStatus != null">
+				book_status,
+			</if>
+			<if test="bookNotes != null">
+				book_notes,
+			</if>
+			<if test="bookUploadDate != null">
+				book_upload_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="bookId != null">
+				#{bookId,jdbcType=INTEGER},
+			</if>
+			<if test="bookName != null">
+				#{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="bookCover != null">
+				#{bookCover,jdbcType=VARCHAR},
+			</if>
+			<if test="bookAuthor != null">
+				#{bookAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="bookType != null">
+				#{bookType,jdbcType=VARCHAR},
+			</if>
+			<if test="bookSubject != null">
+				#{bookSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="bookPress != null">
+				#{bookPress,jdbcType=VARCHAR},
+			</if>
+			<if test="bookDesc != null">
+				#{bookDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="bookPrice != null">
+				#{bookPrice,jdbcType=REAL},
+			</if>
+			<if test="bookOldPrice != null">
+				#{bookOldPrice,jdbcType=REAL},
+			</if>
+			<if test="bookNum != null">
+				#{bookNum,jdbcType=INTEGER},
+			</if>
+			<if test="bookDegree != null">
+				#{bookDegree,jdbcType=VARCHAR},
+			</if>
+			<if test="bookSellerId != null">
+				#{bookSellerId,jdbcType=VARCHAR},
+			</if>
+			<if test="bookStatus != null">
+				#{bookStatus,jdbcType=INTEGER},
+			</if>
+			<if test="bookNotes != null">
+				#{bookNotes,jdbcType=VARCHAR},
+			</if>
+			<if test="bookUploadDate != null">
+				#{bookUploadDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cubtp.vo.Book">
+		update cubtp_book
+		<set>
+			<if test="bookName != null">
+				book_name = #{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="bookCover != null">
+				book_cover = #{bookCover,jdbcType=VARCHAR},
+			</if>
+			<if test="bookAuthor != null">
+				book_author = #{bookAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="bookType != null">
+				book_type = #{bookType,jdbcType=VARCHAR},
+			</if>
+			<if test="bookSubject != null">
+				book_subject = #{bookSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="bookPress != null">
+				book_press = #{bookPress,jdbcType=VARCHAR},
+			</if>
+			<if test="bookDesc != null">
+				book_desc = #{bookDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="bookPrice != null">
+				book_price = #{bookPrice,jdbcType=REAL},
+			</if>
+			<if test="bookOldPrice != null">
+				book_old_price = #{bookOldPrice,jdbcType=REAL},
+			</if>
+			<if test="bookNum != null">
+				book_num = #{bookNum,jdbcType=INTEGER},
+			</if>
+			<if test="bookDegree != null">
+				book_degree = #{bookDegree,jdbcType=VARCHAR},
+			</if>
+			<if test="bookSellerId != null">
+				book_seller_id = #{bookSellerId,jdbcType=VARCHAR},
+			</if>
+			<if test="bookStatus != null">
+				book_status = #{bookStatus,jdbcType=INTEGER},
+			</if>
+			<if test="bookNotes != null">
+				book_notes = #{bookNotes,jdbcType=VARCHAR},
+			</if>
+			<if test="bookUploadDate != null">
+				book_upload_date = #{bookUploadDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where book_id = #{bookId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cubtp.vo.Book">
+		update cubtp_book
+		set book_name =
+		#{bookName,jdbcType=VARCHAR},
+		book_cover =
+		#{bookCover,jdbcType=VARCHAR},
+		book_author =
+		#{bookAuthor,jdbcType=VARCHAR},
+		book_type =
+		#{bookType,jdbcType=VARCHAR},
+		book_subject =
+		#{bookSubject,jdbcType=VARCHAR},
+		book_press =
+		#{bookPress,jdbcType=VARCHAR},
+		book_desc =
+		#{bookDesc,jdbcType=VARCHAR},
+		book_price = #{bookPrice,jdbcType=REAL},
+		book_old_price = #{bookOldPrice,jdbcType=REAL},
+		book_num = #{bookNum,jdbcType=INTEGER},
+		book_degree =
+		#{bookDegree,jdbcType=VARCHAR},
+		book_seller_id =
+		#{bookSellerId,jdbcType=VARCHAR},
+		book_status =
+		#{bookStatus,jdbcType=INTEGER},
+		book_notes =
+		#{bookNotes,jdbcType=VARCHAR},
+		book_upload_date =
+		#{bookUploadDate,jdbcType=TIMESTAMP}
+		where book_id =
+		#{bookId,jdbcType=INTEGER}
+	</update>
+
+
+	<!-- 分页获取所有已通过审核的书籍 -->
+	<select id="getBook" parameterType="map"
+		resultMap="BaseResultMap">
+		select * from cubtp_book where cubtp_book.book_status = 1
+		limit #{currentIndex} , #{pageSize}
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getBookCount" resultType="java.lang.Integer">
+		select count(*) from
+		cubtp_book
+		where cubtp_book.book_status = 1
+	</select>
+	<!--通过sellerId获取所有书籍 -->
+	<select id="getBookBySellerId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		cubtp_book
+		WHERE
+		cubtp_book.book_seller_id =
+		#{bookSellerId, jdbcType=VARCHAR}
+	</select>
+	<!-- 获取所有未审核的书籍 -->
+	<select id="getAllNotcheckedBook" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		cubtp_book
+		WHERE
+		cubtp_book.book_status = 0
+	</select>
+	<!-- 获取所有已审核的书籍 -->
+	<select id="getAllCheckedBook" resultMap="BaseResultMap">
+		SELECT
+		*
+		FROM
+		cubtp_book
+		WHERE
+		cubtp_book.book_status = 1
+	</select>
+
+	<!-- 多条件查询 -->
+	<select id="MultiConditionalQuery"
+		parameterType="com.cubtp.vo.Book" resultMap="BaseResultMap">
+		select * from cubtp_book
+		<where>
+			<if test="BookName!=null">
+				and cubtp_book.book_name = #{BookName}
+			</if>
+			<if test="bookAuthor!=null">
+				and cubtp_book.book_author = #{bookAuthor}
+			</if>
+			<if test="bookType!=null">
+				and cubtp_book.book_type = #{bookType}
+			</if>
+			<if test="bookSubject!=null">
+				and cubtp_book.book_subject = #{bookSubject}
+			</if>
+			<if test="bookPress!=null">
+				and cubtp_book.book_press = #{bookPress}
+			</if>
+			<if test="bookDesc!=null">
+				and cubtp_book.book_desc = #{bookDesc}
+			</if>
+			<if test="bookDegree!=null">
+				and cubtp_book.book_degree = #{bookDegree}
+			</if>
+			<if test="bookSellerId!=null">
+				and cubtp_book.book_seller_id = #{bookSellerId}
+			</if>
+			<if test="bookStatus!=null">
+				and cubtp_book.book_status = #{bookStatus}
+			</if>
+			<if test="bookUploadDate!=null">
+				and cubtp_book.book_upload_date = #{bookUploadDate}
+			</if>
+		</where>
+		order by cubtp_book.book_upload_date DESC
+
+	</select>
+
+	<!-- 搜索 -->
+	<select id="searchBook" parameterType="map"
+		resultMap="BaseResultMap">
+		select * from cubtp_book
+		<where>
+			<if test="content!=null">
+				and cubtp_book.book_name like "%"#{content}"%"
+			</if>
+			<if test="bookType!=null">
+				and cubtp_book.book_type = #{bookType}
+			</if>
+			<if test="bookSubject!=null">
+				and cubtp_book.book_subject = #{bookSubject}
+			</if>
+			<if test="bookDegree!=null">
+				and cubtp_book.book_degree = #{bookDegree}
+			</if>
+			<if test="currentIndex!=null">
+				and cubtp_book.book_status = 1 order by cubtp_book.book_upload_date
+				DESC limit #{currentIndex} , #{pageSize}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="getSearchBookCount" parameterType="map" resultType="java.lang.Integer">
+		select count(*) from cubtp_book
+		<where>
+			<if test="content!=null">
+				and cubtp_book.book_name like "%"#{content}"%"
+			</if>
+			<if test="bookType!=null">
+				and cubtp_book.book_type = #{bookType}
+			</if>
+			<if test="bookSubject!=null">
+				and cubtp_book.book_subject = #{bookSubject}
+			</if>
+			<if test="bookDegree!=null">
+				and cubtp_book.book_degree = #{bookDegree}
+			</if>
+				 and cubtp_book.book_status = 1
+		</where>
+	</select>
+
+
+
+
+</mapper>
